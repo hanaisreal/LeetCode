@@ -27,7 +27,7 @@ class Solution {
             }else{
                 temp[k++] = nums[j++];
             }
-        }
+        } 
         while(i <= mid){
             temp[k++] = nums[i++];
         }
