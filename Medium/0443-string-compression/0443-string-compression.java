@@ -18,11 +18,11 @@ class Solution {
                 count++;
             }
             
-            chars[j++] = charac;
+            
             if(count == 1){ //if there is no duplication, no need to add numbers
-                i++;
-                continue;
+                chars[j++] = charac;
             }else{
+                chars[j++] = charac;
                 String countString = count + "";
                 for(int k = 0; k < countString.length(); k++){  //in case the count is over 1 digit 
                     chars[j++] = countString.charAt(k);  //change the count to string and add number
