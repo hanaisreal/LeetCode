@@ -32,5 +32,7 @@
 <ul>
 	<li><code>2 &lt;= nums.length &lt;= 10<sup>5</sup></code></li>
 	<li><code>1 &lt;= nums[i], minK, maxK &lt;= 10<sup>6</sup></code></li>
-</ul>
+</ul>![2444sol](https://user-images.githubusercontent.com/108045487/222937910-9554d95c-2378-4868-9f60-894dcd74ad75.jpeg)
+
 </div>
+
