@@ -43,7 +43,7 @@ class Solution {
                         queue.add(q);
                     }
                 }
-                jumptoIdxs.clear();
+                jumptoIdxs.clear();  //without this, time limit exceeded occurs. 
             }
             steps++;
         }
