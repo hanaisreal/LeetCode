@@ -1,18 +1,39 @@
 class Solution {
     public long minimumTime(int[] time, int totalTrips) {
-        long lo = 0, hi = 100_000_000_000_000L;
-        while (lo < hi) {
-            long need = lo + (hi - lo) / 2;
-            long trips = 0;
-            for (int t : time) {
-                trips += need / t;
-            }
-            if (trips < totalTrips) {
-                lo = need + 1;
-            }else {
-                hi = need;
+        int mx = 0, min = time[0];
+        for(int t : time){
+            mx = Math.max(t, mx);
+            min = Math.min(t, min);
+        }
+        long totalAtMx = 0;
+        for(int t : time){
+            totalAtMx += mx/t;
+        }
+        
+        long k = totalTrips/totalAtMx;
+        long remainder = totalTrips%totalAtMx;
+        if(remainder != 0) k++;
+        
+        
+
+        long l = min, r = mx*k;
+        while(l <= r){
+            long mid = l + (r-l)/2;
+            long currTotal = getTotal(time, mid);
+            if(currTotal < totalTrips){
+                l = mid+1;
+            }else{
+                r = mid-1;
             }
         }
-        return lo;
+        return l;
+    }
+    
+    int getTotal(int[] time, long budget){
+        int ret = 0;
+        for(int t : time){
+            ret += (budget/t);
+        }
+        return ret;
     }
 }
