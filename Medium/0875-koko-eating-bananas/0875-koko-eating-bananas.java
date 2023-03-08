@@ -20,7 +20,7 @@ class Solution {
     }
     public boolean blackbox(int maxpiles,int[] piles,int h){
         int hours = 0;
-        for(int i : piles){
+        for(int i : piles){ //check if he can eat all banana with that speed 
             int time = i / maxpiles;
             hours += time;
             if(i % maxpiles != 0) hours++;
