@@ -10,29 +10,21 @@
  */
 class Solution {
 
-    private ListNode head;
-    private Random random;
-    
+    ListNode head;
     public Solution(ListNode head) {
-        this.head = head;
-        random = new Random();
+        this.head=head;
     }
     
     public int getRandom() {
-        int count = 0;
-        int result = 0;
-        ListNode curr = head;
-        
-        while(curr != null){
-            count++;
-            //generate a random number between 1 and the count
-            //if the random number is 1, update the result with the current number
-            if(random.nextInt(count) == 0){
-                result = curr.val;
-            }
-            curr = curr.next;
+        ListNode node=head;
+        int counter=0, res=0;
+        while (node!=null){
+            // R. Algo: k/k+counter probablity to be put into reservoir. where k is the size of reservoir=1
+            counter++;
+            if ((int)(Math.random()*counter)==0) res=node.val;
+            node=node.next;
         }
-        return result; 
+        return res;  
     }
 }
 
