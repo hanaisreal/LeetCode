@@ -14,24 +14,18 @@
  * }
  */
 class Solution {
-    int sum = 0;
-    
     public int sumNumbers(TreeNode root) {
-        //depth first search until the end node
-        dfs(root,"");
-        return sum;
+        return dfs(root, 0);
     }
     
-    public void dfs(TreeNode node, String str){
-        if(node == null){
-            return;
+    private int dfs(TreeNode root, int sum) {
+        if (root == null) {
+            return 0;
         }
-        str += node.val;
-        if(node.left == null && node.right == null){
-            sum += Integer.parseInt(str);
-            return;
+        sum = sum * 10 + root.val;
+        if (root.left == null && root.right == null) {
+            return sum;
         }
-        dfs(node.left, str);
-        dfs(node.right, str);
+        return dfs(root.left, sum) + dfs(root.right, sum);
     }
 }
