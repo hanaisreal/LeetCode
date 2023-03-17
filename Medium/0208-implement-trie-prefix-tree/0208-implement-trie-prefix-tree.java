@@ -1,34 +1,54 @@
-class Trie {
+class TrieNode {
+    boolean isCompleteWord;
+    TrieNode[] children;
+    
+    public TrieNode() {
+        isCompleteWord = false; // when the word is complete (mark that node as true)
+        children = new TrieNode[26]; // for 26 possible Childrens (for next letter)
+    }
+}
 
-    List<String> storage;
+class Trie {
+    TrieNode root;
     
     public Trie() {
-        //initialize the trie object
-        storage = new ArrayList<>();
+        root = new TrieNode();
     }
     
     public void insert(String word) {
-        //inserts the string word into the trie
-        storage.add(word);
+        TrieNode node = root;
+        for (char c : word.toCharArray()) {
+            int index = c - 'a';
+            if (node.children[index] == null) {
+                node.children[index] = new TrieNode();
+            }
+            node = node.children[index];
+        }
+        node.isCompleteWord = true;
     }
     
     public boolean search(String word) {
-        //return true if the word is in the trie, and false otherwise
-        for(String value: storage){
-            if(value.equals(word))
-                return true;
+        TrieNode node = root;
+        for (char c : word.toCharArray()) {
+            int index = c - 'a';
+            if (node.children[index] == null) {
+                return false;
+            }
+            node = node.children[index];
         }
-        return false;
+        return node.isCompleteWord;
     }
     
     public boolean startsWith(String prefix) {
-        //returns true if there is a previously inserted 'word' that has the 'prefix', and false otherwise
-        for(String value: storage){
-            if(value.startsWith(prefix))
-                return true;
+        TrieNode node = root;
+        for (char c : prefix.toCharArray()) {
+            int index = c - 'a';
+            if (node.children[index] == null) {
+                return false;
+            }
+            node = node.children[index];
         }
-        return false;
-        
+        return true;
     }
 }
 
