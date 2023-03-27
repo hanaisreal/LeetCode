@@ -16,7 +16,7 @@ class Solution {
         
         //fill in the first row
         for(int i = 1; i < n; i++){
-            dp[0][i] = dp[0][i-1] + grid[0][i];
+            dp[0][i] = dp[0][i-1] + grid[0][i];  //it is adding the left one of the dp table, not grid table
         }
         
         //fill in the first column
