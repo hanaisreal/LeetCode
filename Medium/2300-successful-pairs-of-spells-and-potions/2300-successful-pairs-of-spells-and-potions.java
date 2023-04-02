@@ -13,6 +13,13 @@ class Solution {
             while(left <= right){
                 int mid = left + (right - left)/2;
                 long product = potions[mid] * (long) spells[i];
+                
+                /*don't write in while loop 
+                if(product == success){
+                    result[i] = potions.length - left;
+                }  
+                because there might not be a case where product == success, we only need to find the first index where product >= success
+                */
                 if(product >= success){
                     right = mid - 1;
                 }else{
