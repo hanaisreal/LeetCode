@@ -1,35 +1,39 @@
 class Solution {
     public int[] asteroidCollision(int[] asteroids) {
-        int n = asteroids.length;
-        Stack<Integer> st = new Stack<>();
-        
-        //if the stack is not empty | the top of stack is negative and the current number is positive | current number and top of stack has the same sign(either both positive or negative) --> then, push the number to the stack. 
-        for(int i = 0; i < n; i++){
-            if(st.size() == 0 || st.peek() < 0 && asteroids[i] > 0 || st.peek() > 0 && asteroids[i] > 0 || st.peek() < 0 && asteroids[i] < 0 ) {
-                st.push(asteroids[i]);
+       Stack<Integer> stack = new Stack<>();  
+   for (int asteroid : asteroids) {
+            boolean flag = true;
+            while (!stack.isEmpty() && (stack.peek() > 0 && asteroid < 0)) {
+                // If the top asteroid in the stack is smaller, then it will explode.
+                // Hence pop it from the stack, also continue with the next asteroid in the stack.
+                if (Math.abs(stack.peek()) < Math.abs(asteroid)) {
+                    stack.pop();
+                    continue;
+                }
+                // If both asteroids have the same size, then both asteroids will explode.
+                // Pop the asteroid from the stack; also, we won't push the current asteroid to the stack.
+                else if (Math.abs(stack.peek()) == Math.abs(asteroid)) {
+                    stack.pop();
+                }
+
+                // If we reach here, the current asteroid will be destroyed
+                // Hence, we should not add it to the stack
+                flag = false;
+                break;
             }
-            else{  //the top of the stack is positive and the current number is negative
-                //use while loop to proceed collision with the number in the stack. 
-                
-                while(st.size() > 0 && st.peek() > 0 && st.peek() < Math.abs(asteroids[i])){
-                    st.pop();
-                }
-                
-                if(st.size() == 0 || st.peek() < 0){
-                    st.push(asteroids[i]);
-                }else if(st.peek() == Math.abs(asteroids[i])){
-                    st.pop();
-                }
+
+            if (flag) {
+                stack.push(asteroid);
             }
         }
+    
+   
+    int[] ans=new int[stack.size()];
+    for(int i=ans.length-1;i>=0;i--){
+        ans[i]=stack.pop();
+    }
+
+return ans;
         
-        int[] ans = new int[st.size()];
-        int i = st.size() -1;
-        while(!st.isEmpty()){
-            ans[i] = st.peek();
-            i--;
-            st.pop();
-        }
-        return ans;
     }
 }
